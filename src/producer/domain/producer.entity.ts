@@ -12,7 +12,7 @@ export type ProducerCreateCommand = {
 class Identifier {
   constructor (public readonly value: string) {
     if (!Identifier.validate(value)) {
-      throw new Error('Invalid identifier format. It must be an 11-digit number.')
+      throw new InvalidIdentifierError('Invalid identifier format. It must be an 11-digit number.')
     }
   }
   static validate(identifier: string): boolean {
@@ -20,6 +20,13 @@ class Identifier {
   }
   getValue(): string {
     return this.value
+  }
+}
+
+export class InvalidIdentifierError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = 'InvalidIdentifierError'
   }
 }
 

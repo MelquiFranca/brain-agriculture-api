@@ -1,4 +1,4 @@
-import { Producer } from '@base/domain/producer.entity'
+import { Producer } from '@base/producer/domain/producer.entity'
 import assert from 'assert'
 import { describe, test } from 'node:test'
 
@@ -10,7 +10,7 @@ describe('Productor', () => {
         identifier: '12345678901'
       })
       assert.strictEqual(producer.name, 'Test Producer')
-      assert.strictEqual(producer.identifier, '12345678901')
+      assert.strictEqual(producer.identifier.getValue(), '12345678901')
       assert.strictEqual(producer.producerId, undefined)
     })
     test('should create producer with producerId', () => {
@@ -20,7 +20,7 @@ describe('Productor', () => {
         identifier: '12345678901'
       })
       assert.strictEqual(producer.name, 'Test Producer')
-      assert.strictEqual(producer.identifier, '12345678901')
+      assert.strictEqual(producer.identifier.getValue(), '12345678901')
       assert.strictEqual(producer.producerId, 1)
     })
   })
@@ -56,7 +56,36 @@ describe('Productor', () => {
         identifier: '12345678901'
       })
       producer.changeIdenfifier('09876543210')
-      assert.strictEqual(producer.identifier, '09876543210')
+      assert.strictEqual(producer.identifier.getValue(), '09876543210')
+    })
+  })
+  describe('Identifier validation', () => {
+    test('should throw error for invalid identifier format', () => {
+      assert.throws(() => {
+        new Producer({
+          name: 'Invalid Producer',
+          identifier: 'invalidIdentifier'
+        })
+      }, {
+        name: 'InvalidIdentifierError',
+        message: 'Invalid identifier format. It must be an 11-digit number.'
+      })
+    })
+
+    test('should accept valid 11-digit identifier', () => {
+      const producer = new Producer({
+        name: 'Valid Producer',
+        identifier: '12345678901'
+      })
+      assert.strictEqual(producer.identifier.getValue(), '12345678901')
+    })
+
+    test('should accept valid 14-digit identifier', () => {
+      const producer = new Producer({
+        name: 'Valid Producer',
+        identifier: '12345678901234'
+      })
+      assert.strictEqual(producer.identifier.getValue(), '12345678901234')
     })
   })
 })
