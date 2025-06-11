@@ -4,36 +4,36 @@ import { describe, test } from 'node:test'
 
 describe('Productor', () => {
   describe('constructor', () => {
-    test('should create producer  without producer_id', () => {
+    test('should create producer  without producerId', () => {
       const producer = new Producer({
         name: 'Test Producer',
         identifier: '12345678901'
       })
       assert.strictEqual(producer.name, 'Test Producer')
       assert.strictEqual(producer.identifier, '12345678901')
-      assert.strictEqual(producer.producer_id, undefined)
+      assert.strictEqual(producer.producerId, undefined)
     })
-    test('should create producer with producer_id', () => {
+    test('should create producer with producerId', () => {
       const producer = new Producer({
-        producer_id: 1,
+        producerId: 1,
         name: 'Test Producer',
         identifier: '12345678901'
       })
       assert.strictEqual(producer.name, 'Test Producer')
       assert.strictEqual(producer.identifier, '12345678901')
-      assert.strictEqual(producer.producer_id, 1)
+      assert.strictEqual(producer.producerId, 1)
     })
   })
   describe('toJSON', () => {
     test('should return JSON representation of producer', () => {
       const producer = new Producer({
-        producer_id: 1,
+        producerId: 1,
         name: 'Test Producer',
         identifier: '12345678901'
       })
       const json = producer.toJSON()
       assert.deepStrictEqual(json, {
-        producer_id: 1,
+        producerId: 1,
         name: 'Test Producer',
         identifier: '12345678901'
       })

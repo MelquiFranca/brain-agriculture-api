@@ -1,5 +1,5 @@
 export type ProducerProps = {
-  producer_id?: Number
+  producerId?: Number
   name: string
   identifier: string
 }
@@ -10,11 +10,11 @@ export type ProducerCreateCommand = {
 }
 
 export class Producer {
-  producer_id?: Number
+  producerId?: Number
   name: string
   identifier: string
   constructor (props: ProducerProps) {
-    this.producer_id = props.producer_id
+    this.producerId = props.producerId
     this.name = props.name
     this.identifier = props.identifier
   }
@@ -30,7 +30,7 @@ export class Producer {
   }
   toJSON () {
     return {
-      producer_id: this.producer_id,
+      producerId: this.producerId,
       name: this.name,
       identifier: this.identifier
     }
