@@ -5,6 +5,6 @@ export class ValidationError extends Error {
   }
 
   static fromErrors(errors: string[]): ValidationError {
-    return new ValidationError(errors.join(' '));
+    return new ValidationError(errors.join('; \n'));
   }
 }

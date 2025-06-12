@@ -1,5 +1,6 @@
 import { ValidationError } from "@base/shared/validators/validation-error"
 import { ProducerValidator } from "./producer.validator"
+import { Entity } from "@base/shared/entity"
 
 export type ProducerProps = {
   producerId?: Number
@@ -33,11 +34,12 @@ export class InvalidIdentifierError extends Error {
   }
 }
 
-export class Producer {
+export class Producer extends Entity {
   producerId?: Number
   name: string
   identifier: Identifier
   constructor (props: ProducerProps) {
+    super()
     this.producerId = props.producerId
     this.name = props.name
     this.identifier = new Identifier(props.identifier)
