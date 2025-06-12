@@ -1,3 +1,6 @@
+import { ValidationError } from "@base/shared/validators/validation-error"
+import { ProducerValidator } from "./producer.validator"
+
 export type ProducerProps = {
   producerId?: Number
   name: string
@@ -9,7 +12,7 @@ export type ProducerCreateCommand = {
   identifier: string
 }
 
-class Identifier {
+export class Identifier {
   constructor (public readonly value: string) {
     if (!Identifier.validate(value)) {
       throw new InvalidIdentifierError('Invalid identifier format. It must be an 11-digit number.')
@@ -38,10 +41,19 @@ export class Producer {
     this.producerId = props.producerId
     this.name = props.name
     this.identifier = new Identifier(props.identifier)
+    Producer.validate(this)
   }
   // factory method
   static create (props: ProducerCreateCommand): Producer {
-    return new Producer(props)
+    const producer = new Producer(props)
+    Producer.validate(producer)
+    return producer
+  }
+  static validate (producer: Producer): void {
+    const validateResult = new ProducerValidator().validate(producer)
+    if (validateResult.length) {
+      throw ValidationError.fromErrors(validateResult)
+    }
   }
   changeName (name: string): void {
     this.name = name

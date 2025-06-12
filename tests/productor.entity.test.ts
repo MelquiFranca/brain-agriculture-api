@@ -1,8 +1,10 @@
-import { Producer } from '@base/producer/domain/producer.entity'
+import { Identifier, Producer } from '@base/producer/domain/producer.entity'
 import assert from 'assert'
-import { describe, test } from 'node:test'
+import { describe, test, mock, afterEach } from 'node:test'
 
 describe('Productor', () => {
+  const mockIdentifierValidate = mock.method(Identifier as any, 'validate')
+  afterEach(() => mock.restoreAll())
   describe('constructor', () => {
     test('should create producer  without producerId', () => {
       const producer = new Producer({
@@ -70,6 +72,7 @@ describe('Productor', () => {
         name: 'InvalidIdentifierError',
         message: 'Invalid identifier format. It must be an 11-digit number.'
       })
+      assert.strictEqual(mockIdentifierValidate.mock.callCount(), 1)
     })
 
     test('should accept valid 11-digit identifier', () => {
@@ -78,6 +81,7 @@ describe('Productor', () => {
         identifier: '12345678901'
       })
       assert.strictEqual(producer.identifier.getValue(), '12345678901')
+      assert.strictEqual(mockIdentifierValidate.mock.callCount(), 1)
     })
 
     test('should accept valid 14-digit identifier', () => {
@@ -86,6 +90,7 @@ describe('Productor', () => {
         identifier: '12345678901234'
       })
       assert.strictEqual(producer.identifier.getValue(), '12345678901234')
+      assert.strictEqual(mockIdentifierValidate.mock.callCount(), 1)
     })
   })
 })
