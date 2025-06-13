@@ -1,6 +1,7 @@
 import { ValidationError } from "@base/shared/validators/validation-error"
 import { Entity } from "@base/shared/entity"
 import { FarmValidator } from "./farm.validator"
+import { Producer } from "@base/producer/domain/producer.entity"
 
 export type FarmProps = {
   farmId?: Number
@@ -9,6 +10,7 @@ export type FarmProps = {
   totalArea: Number
   totalArableArea: Number
   totalVegetationArea: Number
+  producer: Producer
 }
 
 export type FarmCreateCommand = {
@@ -17,6 +19,7 @@ export type FarmCreateCommand = {
   totalArea: Number
   totalArableArea: Number
   totalVegetationArea: Number
+  producer: Producer
 }
 
 export class Farm extends Entity {
@@ -26,6 +29,7 @@ export class Farm extends Entity {
   totalArea: Number
   totalArableArea: Number
   totalVegetationArea: Number
+  producer: Producer
   constructor (props: FarmProps) {
     super()
     Object.assign(this, props)
@@ -57,6 +61,9 @@ export class Farm extends Entity {
   changeTotalVegetationArea (totalVegetationArea: Number): void {
     this.totalVegetationArea = totalVegetationArea
   }
+  changeProducer (producer: Producer): void {
+    this.producer = producer
+  }
   toJSON () {
     return {
       farmId: this.farmId,
@@ -65,6 +72,7 @@ export class Farm extends Entity {
       totalArea: this.totalArea,
       totalArableArea: this.totalArableArea,
       totalVegetationArea: this.totalVegetationArea,
+      producer: this.producer.toJSON()
     }
   }
 }

@@ -1,9 +1,16 @@
 import { Farm } from '@base/farm/domain/farm.entity'
+import { Producer } from '@base/producer/domain/producer.entity'
 import assert from 'assert'
 import { describe, test, mock, afterEach } from 'node:test'
 
 describe.only('Farm', () => {
   afterEach(() => mock.restoreAll())
+  const producer = new Producer({
+    producerId: 1,
+    name: 'Test Producer',
+    identifier: '12345678901'
+  })
+
   describe('constructor', () => {
     test('should create farm  without farmId', () => {
       const farm = new Farm({
@@ -11,7 +18,8 @@ describe.only('Farm', () => {
         state: 'State Farm',
         totalArea: 100,
         totalArableArea: 50,
-        totalVegetationArea: 30
+        totalVegetationArea: 30,
+        producer
       })
       assert.strictEqual(farm.city, 'City Farm')
       assert.strictEqual(farm.state, 'State Farm')
@@ -27,7 +35,8 @@ describe.only('Farm', () => {
         state: 'State Farm',
         totalArea: 100,
         totalArableArea: 50,
-        totalVegetationArea: 30
+        totalVegetationArea: 30,
+        producer
       })
       assert.strictEqual(farm.city, 'City Farm')
       assert.strictEqual(farm.state, 'State Farm')
@@ -45,9 +54,10 @@ describe.only('Farm', () => {
         state: 'State Farm',
         totalArea: 100,
         totalArableArea: 50,
-        totalVegetationArea: 30
+        totalVegetationArea: 30,
+        producer
       })
-      const json = farm.toJSON()
+      const { producer: producerResult, ...json } = farm.toJSON()
       assert.deepStrictEqual(json, {
         farmId: 1,
         city: 'City Farm',
@@ -56,6 +66,7 @@ describe.only('Farm', () => {
         totalArableArea: 50,
         totalVegetationArea: 30
       })
+      assert.deepStrictEqual(producerResult, producer.toJSON())
     })
   })
   describe('changeCity', () => {
@@ -65,7 +76,8 @@ describe.only('Farm', () => {
         state: 'State Farm',
         totalArea: 100,
         totalArableArea: 50,
-        totalVegetationArea: 30
+        totalVegetationArea: 30,
+        producer
       })
       farm.changeCity('New Name')
       assert.strictEqual(farm.city, 'New Name')
@@ -78,7 +90,8 @@ describe.only('Farm', () => {
         state: 'State Farm',
         totalArea: 100,
         totalArableArea: 50,
-        totalVegetationArea: 30
+        totalVegetationArea: 30,
+        producer
       })
       farm.changeState('New Name')
       assert.strictEqual(farm.state, 'New Name')
@@ -91,7 +104,8 @@ describe.only('Farm', () => {
         state: 'State Farm',
         totalArea: 100,
         totalArableArea: 50,
-        totalVegetationArea: 30
+        totalVegetationArea: 30,
+        producer
       })
       farm.changeTotalArea(120)
       assert.strictEqual(farm.totalArea, 120)
@@ -104,7 +118,8 @@ describe.only('Farm', () => {
         state: 'State Farm',
         totalArea: 100,
         totalArableArea: 50,
-        totalVegetationArea: 30
+        totalVegetationArea: 30,
+        producer
       })
       farm.changeTotalArableArea(40)
       assert.strictEqual(farm.totalArableArea, 40)
@@ -117,7 +132,8 @@ describe.only('Farm', () => {
         state: 'State Farm',
         totalArea: 100,
         totalArableArea: 50,
-        totalVegetationArea: 30
+        totalVegetationArea: 30,
+        producer
       })
       farm.changeTotalVegetationArea(40)
       assert.strictEqual(farm.totalVegetationArea, 40)
