@@ -25,7 +25,7 @@ export class ProducerModel implements IOperationsModel {
     const values = [...Object.values(model), model.id]
     return { text, values }
   }
-  getDeleteQuery (modelId: string): QueryModelResult {
+  getDeleteQuery (modelId: Number): QueryModelResult {
     const text = `DELETE FROM ${ProducerModel.TABLE_NAME} WHERE producer_id = $1`
     const values = [modelId]
     return { text, values }

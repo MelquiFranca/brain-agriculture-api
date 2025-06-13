@@ -31,7 +31,7 @@ export class FarmModel implements IOperationsModel {
     const values = [...Object.values(model), model.id]
     return { text, values }
   }
-  getDeleteQuery (modelId: string): QueryModelResult {
+  getDeleteQuery (modelId: Number): QueryModelResult {
     const text = `DELETE FROM ${FarmModel.TABLE_NAME} WHERE farm_id = $1`
     const values = [modelId]
     return { text, values }
