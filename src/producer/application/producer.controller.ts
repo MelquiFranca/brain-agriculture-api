@@ -12,32 +12,52 @@ export class ProducerController implements IController {
   constructor (private readonly repository: IRepository<Producer>) {
   }
   async create(request: Request, response: Response): Promise<any> {
-    const { body } = request
-    const createProducerUseCase = new CreateProducerUseCase(this.repository)
-    const result = await createProducerUseCase.execute(body)
-    response.status(201).send(result)
+    try {
+      const { body } = request
+      const createProducerUseCase = new CreateProducerUseCase(this.repository)
+      const result = await createProducerUseCase.execute(body)
+      response.status(201).json(result)
+    } catch (error) {
+      response.status(400).send(error)
+    }
   }
   async list(request: Request, response: Response): Promise<any> {
-    const listProducerUseCase = new ListProducerUseCase(this.repository)
-    const result = await listProducerUseCase.execute({})
-    response.status(200).send(result)
+    try {
+      const listProducerUseCase = new ListProducerUseCase(this.repository)
+      const result = await listProducerUseCase.execute({})
+      response.status(200).json(result)
+    } catch (error) {
+      response.status(400).send(error)
+    }
   }
   async findOne(request: Request, response: Response): Promise<any> {
-    const { id } = request.params
-    const findProducerUseCase = new FindProducerUseCase(this.repository)
-    const result = await findProducerUseCase.execute({ id: Number(id) })
-    response.status(200).send(result)
+    try {
+      const { id } = request.params
+      const findProducerUseCase = new FindProducerUseCase(this.repository)
+      const result = await findProducerUseCase.execute({ id: Number(id) })
+      response.status(200).json(result)
+    } catch (error) {
+      response.status(400).send(error)
+    }
   }
   async delete(request: Request, response: Response): Promise<any> {
-    const { body } = request
-    const deleteProducerUseCase = new DeleteProducerUseCase(this.repository)
-    const result = await deleteProducerUseCase.execute(body)
-    response.status(200).send(result)
+    try {
+      const { body } = request
+      const deleteProducerUseCase = new DeleteProducerUseCase(this.repository)
+      const result = await deleteProducerUseCase.execute(body)
+      response.status(200).json(result)
+    } catch (error) {
+      response.status(400).send(error)
+    }
   }
   async update(request: Request, response: Response): Promise<any> {
-    const { body } = request
-    const updateProducerUseCase = new UpdateProducerUseCase(this.repository)
-    const result = await updateProducerUseCase.execute(body)
-    response.status(201).send(result)
+    try {
+      const { body } = request
+      const updateProducerUseCase = new UpdateProducerUseCase(this.repository)
+      const result = await updateProducerUseCase.execute(body)
+      response.status(201).json(result)
+    } catch (error) {
+      response.status(400).send(error)
+    }
   }
 }
