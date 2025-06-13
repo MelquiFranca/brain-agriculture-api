@@ -4,7 +4,7 @@ import { Harvest } from '@base/harvest/domain/harvest.entity'
 import assert from 'assert'
 import { describe, test, mock, afterEach, beforeEach } from 'node:test'
 
-describe.only('Harvest', () => {
+describe('Harvest', () => {
   let farm: Farm;
   afterEach(() => mock.restoreAll())
   beforeEach(() => {

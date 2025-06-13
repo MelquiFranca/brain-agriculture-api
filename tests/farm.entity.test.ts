@@ -3,7 +3,7 @@ import { Producer } from '@base/producer/domain/producer.entity'
 import assert from 'assert'
 import { describe, test, mock, afterEach } from 'node:test'
 
-describe.only('Farm', () => {
+describe('Farm', () => {
   afterEach(() => mock.restoreAll())
   const producer = new Producer({
     producerId: 1,
