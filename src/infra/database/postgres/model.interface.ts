@@ -1,3 +1,3 @@
 export interface IModel {
-  id: Number
+  id?: Number
 }

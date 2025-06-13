@@ -4,10 +4,16 @@ import { IModel } from "./model.interface"
 import { IOperationsModel } from "./operation-model.interface"
 
 export class PostgresDatabase implements IDatabase<IModel> {
-  constructor(private readonly client: Client, private readonly modelOperations: IOperationsModel) {}
-  async insert(model: IModel): Promise<void> {
+  private modelOperations: IOperationsModel
+  constructor(private readonly client: Client) {}
+  setModelOperations(modelOperations: IOperationsModel): PostgresDatabase {
+    this.modelOperations = modelOperations
+    return this
+  }
+  async insert(model: IModel): Promise<any> {
     const query = this.modelOperations.getInsertQuery(model)
-    await this.client.query(query)
+    const result = await this.client.query(query)
+    return result.rows[0]
   }
   async update(model: IModel): Promise<void> {
     const query = this.modelOperations.getUpdateQuery(model)

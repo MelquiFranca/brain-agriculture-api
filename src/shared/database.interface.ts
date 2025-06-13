@@ -1,7 +1,8 @@
 export interface IDatabase<Type> {
-  insert(entity: Type): Promise<void>
-  update(entity: Type): Promise<void>
+  setModelOperations(operations: any): IDatabase<Type>
+  insert(entity: Type): Promise<any>
+  update(entity: Type): Promise<any>
   findById(entityId: number): Promise<any>
   remove(entityId: number): Promise<void>
-  findAll(): Promise<Type[]>
+  findAll(): Promise<any[]>
 }
