@@ -1,7 +1,6 @@
 import { ValidationError } from "@base/shared/validators/validation-error"
 import { Entity } from "@base/shared/entity"
 import { HarvestValidator } from "./harvest.validator"
-import { Producer } from "@base/producer/domain/producer.entity"
 import { Farm } from "@base/farm/domain/farm.entity"
 
 export type HarvestProps = {
@@ -15,9 +14,6 @@ export type HarvestCreateCommand = {
   name: string
   year: Number
   farm: Farm
-  totalArableArea: Number
-  totalVegetationArea: Number
-  producer: Producer
 }
 
 export class Harvest extends Entity {
