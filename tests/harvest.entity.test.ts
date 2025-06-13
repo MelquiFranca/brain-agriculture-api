@@ -5,7 +5,7 @@ import assert from 'assert'
 import { describe, test, mock, afterEach, beforeEach } from 'node:test'
 
 describe('Harvest', () => {
-  let farm: Farm;
+  let farm: Farm
   afterEach(() => mock.restoreAll())
   beforeEach(() => {
     farm = new Farm({

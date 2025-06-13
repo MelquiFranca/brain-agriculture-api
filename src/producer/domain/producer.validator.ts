@@ -1,4 +1,4 @@
-import IValidatorFields from '@base/shared/validators/validator-fields-interface'
+import IValidatorFields from '@base/shared/validators/validator-fields.interface'
 import { Producer } from './producer.entity'
 
 export class ProducerValidator implements IValidatorFields {
