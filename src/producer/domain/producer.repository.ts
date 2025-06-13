@@ -39,10 +39,15 @@ export class ProducerRepository implements IRepository<Producer> {
       name: result.name
     })
   }
-  async remove(entityId: number): Promise<void> {
-    return await this.database
+  async remove(entityId: number): Promise<Producer> {
+    const result = await this.database
       .setModelOperations(this.producerModel)
       .remove(entityId)
+    return new Producer({
+      producerId: result.producer_id,
+      identifier: result.identifier,
+      name: result.name
+    })
   }
   async findAll(): Promise<Producer[]> {
     const result = await this.database

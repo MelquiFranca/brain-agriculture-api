@@ -24,9 +24,10 @@ export class PostgresDatabase implements IDatabase<IModel> {
     const result = await this.client.query(query)
     return result.rows[0]
   }
-  async remove(modelId: number): Promise<void> {
+  async remove(modelId: number): Promise<any> {
     const query = this.modelOperations.getDeleteQuery(modelId)
     const result = await this.client.query(query)
+    return result.rows[0]
   }
   async findAll(): Promise<any[]> {
     const text = this.modelOperations.getSelectAllQuery()

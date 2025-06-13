@@ -3,6 +3,6 @@ export interface IDatabase<Type> {
   insert(entity: Type): Promise<any>
   update(entity: Type): Promise<any>
   findById(entityId: number): Promise<any>
-  remove(entityId: number): Promise<void>
+  remove(entityId: number): Promise<any>
   findAll(): Promise<any[]>
 }
