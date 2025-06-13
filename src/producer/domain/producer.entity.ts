@@ -45,7 +45,6 @@ export class Producer extends Entity {
     this.identifier = new Identifier(props.identifier)
     Producer.validate(this)
   }
-  // factory method
   static create (props: ProducerCreateCommand): Producer {
     const producer = new Producer(props)
     Producer.validate(producer)
