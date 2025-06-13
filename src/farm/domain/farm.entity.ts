@@ -5,6 +5,7 @@ import { Producer } from "@base/producer/domain/producer.entity"
 
 export type FarmProps = {
   farmId?: Number
+  name: string
   city: string
   state: string
   totalArea: Number
@@ -14,6 +15,7 @@ export type FarmProps = {
 }
 
 export type FarmCreateCommand = {
+  name: string
   city: string
   state: string
   totalArea: Number
@@ -24,6 +26,7 @@ export type FarmCreateCommand = {
 
 export class Farm extends Entity {
   farmId?: Number
+  name: string
   city: string
   state: string
   totalArea: Number
@@ -46,6 +49,9 @@ export class Farm extends Entity {
       throw ValidationError.fromErrors(validateResult)
     }
   }
+  changeName (name: string): void {
+    this.name = name
+  }
   changeCity (city: string): void {
     this.city = city
   }
@@ -67,6 +73,7 @@ export class Farm extends Entity {
   toJSON () {
     return {
       farmId: this.farmId,
+      name: this.name,
       city: this.city,
       state: this.state,
       totalArea: this.totalArea,

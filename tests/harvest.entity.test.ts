@@ -10,7 +10,8 @@ describe('Harvest', () => {
   beforeEach(() => {
     farm = new Farm({
       farmId: 1,
-      city: 'Test Name',
+      name: 'Test Name',
+      city: 'City Name',
       state: 'Test Year',
       totalArea: 100,
       totalArableArea: 50,
@@ -85,6 +86,7 @@ describe('Harvest', () => {
     test('should change harvest total area', () => {
       const newFarm = new Farm({
         farmId: 2,
+        name: 'New Name',
         city: 'New City',
         state: 'New State',
         totalArea: 200,

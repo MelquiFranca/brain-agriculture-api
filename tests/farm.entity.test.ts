@@ -14,6 +14,7 @@ describe('Farm', () => {
   describe('constructor', () => {
     test('should create farm  without farmId', () => {
       const farm = new Farm({
+        name: 'City Farm',
         city: 'City Farm',
         state: 'State Farm',
         totalArea: 100,
@@ -31,6 +32,7 @@ describe('Farm', () => {
     test('should create farm with farmId', () => {
       const farm = new Farm({
         farmId: 1,
+        name: 'City Farm',
         city: 'City Farm',
         state: 'State Farm',
         totalArea: 100,
@@ -50,6 +52,7 @@ describe('Farm', () => {
     test('should return JSON representation of farm', () => {
       const farm = new Farm({
         farmId: 1,
+        name: 'City Farm',
         city: 'City Farm',
         state: 'State Farm',
         totalArea: 100,
@@ -60,6 +63,7 @@ describe('Farm', () => {
       const { producer: producerResult, ...json } = farm.toJSON()
       assert.deepStrictEqual(json, {
         farmId: 1,
+        name: 'City Farm',
         city: 'City Farm',
         state: 'State Farm',
         totalArea: 100,
@@ -72,6 +76,7 @@ describe('Farm', () => {
   describe('changeCity', () => {
     test('should change farm city', () => {
       const farm = new Farm({
+        name: 'Old Name',
         city: 'Old Name',
         state: 'State Farm',
         totalArea: 100,
@@ -83,9 +88,25 @@ describe('Farm', () => {
       assert.strictEqual(farm.city, 'New Name')
     })
   })
+  describe('changeName', () => {
+    test('should change farm name', () => {
+      const farm = new Farm({
+        name: 'Old Name',
+        city: 'Old Name',
+        state: 'State Farm',
+        totalArea: 100,
+        totalArableArea: 50,
+        totalVegetationArea: 30,
+        producer
+      })
+      farm.changeName('New Name')
+      assert.strictEqual(farm.name, 'New Name')
+    })
+  })
   describe('changeState', () => {
     test('should change farm state', () => {
       const farm = new Farm({
+        name: 'Old Name',
         city: 'Old Name',
         state: 'State Farm',
         totalArea: 100,
@@ -100,6 +121,7 @@ describe('Farm', () => {
   describe('changeTotalArea', () => {
     test('should change farm total area', () => {
       const farm = new Farm({
+        name: 'Old Name',
         city: 'Old Name',
         state: 'State Farm',
         totalArea: 100,
@@ -114,6 +136,7 @@ describe('Farm', () => {
   describe('changeTotalArableArea', () => {
     test('should change farm total arable area', () => {
       const farm = new Farm({
+        name: 'Old Name',
         city: 'Old Name',
         state: 'State Farm',
         totalArea: 100,
@@ -128,6 +151,7 @@ describe('Farm', () => {
   describe('changeTotalVegetationArea', () => {
     test('should change farm total vegetation area', () => {
       const farm = new Farm({
+        name: 'Old Name',
         city: 'Old Name',
         state: 'State Farm',
         totalArea: 100,

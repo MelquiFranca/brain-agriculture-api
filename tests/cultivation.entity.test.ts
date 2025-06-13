@@ -6,7 +6,7 @@ import { Cultivation } from '@base/cultivation/domain/cultivation.entity'
 import { Harvest } from '@base/harvest/domain/harvest.entity'
 
 describe('Harvest', () => {
-  let harvest: Harvest;
+  let harvest: Harvest
   afterEach(() => mock.restoreAll())
   beforeEach(() => {
     harvest = new Harvest({
@@ -15,6 +15,7 @@ describe('Harvest', () => {
       year: 2025,
       farm: new Farm({
         farmId: 1,
+        name: 'Test Name',
         city: 'Test Name',
         state: 'Test Year',
         totalArea: 100,
@@ -77,6 +78,7 @@ describe('Harvest', () => {
         year: 2020,
         farm: new Farm({
           farmId: 2,
+          name: 'New Name',
           city: 'New City',
           state: 'New State',
           totalArea: 200,
