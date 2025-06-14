@@ -7,8 +7,10 @@ import { ListProducerUseCase } from "./list-producer.use-case"
 import { FindProducerUseCase } from "./find-producer.use-case"
 import { DeleteProducerUseCase } from "./delete-producer.use-case"
 import { UpdateProducerUseCase } from "./update-producer.use-case"
+import { logger } from "@base/shared/logger"
 
 export class ProducerController implements IController {
+  static path: string = 'producers'
   constructor (private readonly repository: IRepository<Producer>) {
   }
   async create(request: Request, response: Response): Promise<any> {
@@ -18,15 +20,18 @@ export class ProducerController implements IController {
       const result = await createProducerUseCase.execute(body)
       response.status(201).json(result)
     } catch (error) {
+      logger.log('error', 'ProducerController', error)
       response.status(400).send(error)
     }
   }
   async list(request: Request, response: Response): Promise<any> {
     try {
+      const { body } = request
       const listProducerUseCase = new ListProducerUseCase(this.repository)
-      const result = await listProducerUseCase.execute({})
+      const result = await listProducerUseCase.execute(body)
       response.status(200).json(result)
     } catch (error) {
+      logger.log('error', 'ProducerController', error)
       response.status(400).send(error)
     }
   }
@@ -37,6 +42,7 @@ export class ProducerController implements IController {
       const result = await findProducerUseCase.execute({ id: Number(id) })
       response.status(200).json(result)
     } catch (error) {
+      logger.log('error', 'ProducerController', error)
       response.status(400).send(error)
     }
   }
@@ -47,6 +53,7 @@ export class ProducerController implements IController {
       const result = await deleteProducerUseCase.execute(body)
       response.status(200).json(result)
     } catch (error) {
+      logger.log('error', 'ProducerController', error)
       response.status(400).send(error)
     }
   }
@@ -57,6 +64,7 @@ export class ProducerController implements IController {
       const result = await updateProducerUseCase.execute(body)
       response.status(201).json(result)
     } catch (error) {
+      logger.log('error', 'ProducerController', error)
       response.status(400).send(error)
     }
   }
